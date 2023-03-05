@@ -1,23 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { users } from '../mock/users.mock';
 
 export interface UsersElement {
   id: number;
   name: string;
+  email: string;
+  password: string;
   role: number; // enum
 }
 
-const ELEMENT_DATA: UsersElement[] = [
-  {id: 1, name: 'Hydrogen', role: 1.0079},
-  {id: 2, name: 'Helium', role: 4.0026},
-  {id: 3, name: 'Lithium', role: 6.941},
-  {id: 4, name: 'Beryllium', role: 9.0122},
-  {id: 5, name: 'Boron', role: 10.811},
-  {id: 6, name: 'Carbon', role: 12.0107},
-  {id: 7, name: 'Nitrogen', role: 14.0067},
-  {id: 8, name: 'Oxygen', role: 15.9994},
-  {id: 9, name: 'Fluorine', role: 18.9984},
-  {id: 10, name: 'Neon', role: 20.1797},
-];
+const ELEMENT_DATA: UsersElement[] = users;
 
 @Component({
   selector: 'app-users',

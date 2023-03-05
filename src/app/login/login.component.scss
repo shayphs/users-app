@@ -1,3 +1,10 @@
-.example-container mat-form-field + mat-form-field {
-    margin-left: 8px;
-  }
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-container {
+    width: 600px;
+    margin-top: 3em;
+}
