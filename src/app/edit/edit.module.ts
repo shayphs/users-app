@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { MaterialModule } from '../material.module';
 import { EditRoutingModule } from './edit-routing.module';
 import { EditComponent } from './edit.component';
 
@@ -11,7 +13,10 @@ import { EditComponent } from './edit.component';
   ],
   imports: [
     CommonModule,
-    EditRoutingModule
+    FormsModule,
+    ReactiveFormsModule,
+    EditRoutingModule,
+    MaterialModule
   ]
 })
 export class EditModule { }

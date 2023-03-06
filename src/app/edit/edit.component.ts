@@ -1,4 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import { users } from '../mock/users.mock';
+
+export interface DialogData {
+  email: string;
+  role: string;
+  name: string;
+  password: string;
+}
 
 @Component({
   selector: 'app-edit',
@@ -6,10 +16,39 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./edit.component.scss']
 })
 export class EditComponent implements OnInit {
+  form: FormGroup = new FormGroup({});
+  flag: boolean = true;
 
-  constructor() { }
+  constructor(private fb: FormBuilder,public dialogRef: MatDialogRef<EditComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   ngOnInit(): void {
+    this.form = this.fb.group({
+      name: [null, [Validators.required]],
+      role: [null, [Validators.required]],
+      email: [null, [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+      password: [null, [Validators.required, Validators.minLength(6)]],
+    });
+    this.editSetValue();
   }
 
+  editSetValue() {
+    this.form.setValue({
+      name: this.data.name,
+      role: this.data.role,
+      email: this.data.email,
+      password: this.data.password,
+    });
+  }
+
+  edit() {
+    // const isValidUser = users.some((element:any) => {
+    //   return element.email === this.form.value.email && element.password === this.form.value.password;
+    // });
+
+    // if (isValidUser) {
+    //   // do login
+    //   localStorage.setItem('credentials', JSON.stringify(this.form.value.email));
+    // }
+  }
 }

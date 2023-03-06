@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material.module';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
+import { EditModule } from '../edit/edit.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { ProfileComponent } from './profile.component';
   imports: [
     CommonModule,
     ProfileRoutingModule,
-    MaterialModule
+    MaterialModule,
+    EditModule
   ]
 })
 export class ProfileModule { }
