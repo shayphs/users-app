@@ -28,20 +28,21 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    const isValidUser = users.some((element: any) => {
+    const validUser = users.find((element: any) => {
+      console.log(element);
+      console.log(this.form.value);
       return (
         element.email === this.form.value.email &&
         element.password === this.form.value.password
-      );
-    });
-
-    if (isValidUser) {
-      // do login
-      localStorage.setItem(
+        );
+      });
+      
+    if (!!validUser) {
+       localStorage.setItem(
         'credentials',
-        JSON.stringify(this.form.value.email)
+        JSON.stringify(validUser.email)
       );
-      localStorage.setItem('role', JSON.stringify('Admin'));
+      localStorage.setItem('role', JSON.stringify(validUser.role));
       this.router.navigate(['/users']);
     }
   }

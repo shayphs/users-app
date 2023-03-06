@@ -15,7 +15,7 @@ export let users: any = [
   {
     id: 2,
     name: 'Mark Smith',
-    email: 'mark.Smith@gmail.com',
+    email: 'mark.smith@gmail.com',
     password: '123456',
     role: role.User,
     createdAt: 1678101263197,

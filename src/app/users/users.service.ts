@@ -17,6 +17,15 @@ export class UsersService {
   getUser(id: number): Observable<any> {
     return this.http.get<UsersModel>(`http://localhost:3000/users/${id}`);
   }
+  
+  updateUser(id: number, data: any): Observable<any> {
+    if (id) {
+      return this.http.patch<UsersModel>(`http://localhost:3000/users/${id}`, data);
+    }
+    
+    data.createdAt = Date.now();
+    return this.http.post<UsersModel>(`http://localhost:3000/users`, data);
+  }
 
   deleteUser(id: number): Observable<any> {
     return this.http.delete<UsersModel>(`http://localhost:3000/users/${id}`);

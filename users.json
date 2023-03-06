@@ -45,8 +45,24 @@
       "name": "Lauren Smith",
       "email": "lauren.smith@gmail.com",
       "password": "123456",
-      "role": "User",
+      "role": "Admin",
       "createdAt": 1678101269965
+    },
+    {
+      "name": "John Smith",
+      "role": "Admin",
+      "email": null,
+      "password": "123456",
+      "createdAt": 1678129725983,
+      "id": 8
+    },
+    {
+      "name": "Anna Smith",
+      "role": null,
+      "email": null,
+      "password": "123456",
+      "createdAt": 1678131176358,
+      "id": 9
     }
   ]
 }

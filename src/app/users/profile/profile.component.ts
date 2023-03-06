@@ -12,6 +12,8 @@ import { UsersService } from '../users.service';
 export class ProfileComponent implements OnInit {
   user: any;
   isLoading = false;
+  disableEdit = true;
+  userEmail = localStorage.getItem('credentials')?.replace(/\"/g, '');
 
   constructor(private route: ActivatedRoute, private usersService: UsersService) {}
 
@@ -19,6 +21,7 @@ export class ProfileComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.getUser(params['id']);
     });
+    this.disableEdit = localStorage.getItem('role') !== '"Admin"';
   }
 
   getUser(id: number) {

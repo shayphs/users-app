@@ -1,14 +1,12 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Component, OnInit, ViewChild, Inject } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { role, users } from '../mock/users.mock';
 import { EditComponent } from './edit/edit.component';
-import { UsersService } from './users.service';
 import { UsersModel } from './users.model';
+import { UsersService } from './users.service';
 
 const ELEMENT_DATA: UsersModel[] = [];
 
@@ -18,9 +16,11 @@ const ELEMENT_DATA: UsersModel[] = [];
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'role', 'action'];
+  displayedColumns: string[] = ['createdAt', 'name', 'role', 'action'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   isLoading = false;
+  disableEdit = true;
+  userEmail = localStorage.getItem('credentials')?.replace(/\"/g, '');
 
   constructor(
     public dialog: MatDialog,
@@ -36,6 +36,7 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUsers();
+    this.disableEdit = localStorage.getItem('role') !== '"Admin"';
   }
 
   getUsers(){
@@ -51,7 +52,7 @@ export class UsersComponent implements OnInit {
       });
   }
 
-  openDialog(user: UsersModel): void {
+  openDialog(user: UsersModel | null): void {
     const dialogRef = this.dialog.open(EditComponent, {
       data: { ...user },
     });

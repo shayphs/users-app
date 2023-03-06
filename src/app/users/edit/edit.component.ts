@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { role, users } from '../../mock/users.mock';
 import { UsersModel } from '../users.model';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-edit',
@@ -17,7 +18,8 @@ export class EditComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<EditComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: UsersModel
+    @Inject(MAT_DIALOG_DATA) public data: UsersModel,
+    private usersService: UsersService
   ) {}
 
   ngOnInit(): void {
@@ -50,8 +52,6 @@ export class EditComponent implements OnInit {
   }
 
   edit() {
-    const user = users.find((usr: UsersModel) => usr.id === this.data.id);
-    const i = users.indexOf(user);
-    users[i] = this.form.value;
+    this.usersService.updateUser(this.data.id, this.form.value).subscribe({});
   }
 }
