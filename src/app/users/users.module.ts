@@ -14,7 +14,7 @@ import { EditModule } from './edit/edit.module';
     CommonModule,
     UsersRoutingModule,
     MaterialModule,
-    EditModule
+    EditModule,
   ]
 })
 export class UsersModule { }

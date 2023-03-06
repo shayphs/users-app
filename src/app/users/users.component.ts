@@ -1,5 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { MatSort, Sort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 import { EditComponent } from './edit/edit.component';
 import { users } from '../mock/users.mock';
@@ -22,16 +25,23 @@ const ELEMENT_DATA: UsersElement[] = users;
 })
 export class UsersComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'role', 'action'];
-  dataSource = ELEMENT_DATA;
+  // dataSource = ELEMENT_DATA;
+  dataSource = new MatTableDataSource(ELEMENT_DATA);
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private _liveAnnouncer: LiveAnnouncer) { }
+
+  @ViewChild(MatSort) sort: any;
+
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+  }
 
   ngOnInit(): void {
   }
 
   openDialog(user: any): void {
     const dialogRef = this.dialog.open(EditComponent, {
-      data: {...user},
+      data: { ...user },
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -39,4 +49,11 @@ export class UsersComponent implements OnInit {
     });
   }
 
+  announceSortChange(sortState: Sort) {
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
+    }
+  }
 }
