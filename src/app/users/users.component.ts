@@ -35,6 +35,10 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getUsers();
+  }
+
+  getUsers(){
     this.isLoading = true;
     this.usersService.getUsers().subscribe(
       (res) => {
@@ -53,7 +57,7 @@ export class UsersComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      // this.dataSource = result;
+      this.getUsers();
     });
   }
 
@@ -63,7 +67,7 @@ export class UsersComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      // this.dataSource = result;
+      this.getUsers();
     });
   }
 
@@ -97,12 +101,11 @@ export class DeleteUserComponent {
 
   constructor(
     public dialogRef: MatDialogRef<EditComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: UsersModel
+    @Inject(MAT_DIALOG_DATA) public data: UsersModel,
+    private usersService: UsersService
   ) {}
 
   removeUser() {
-    const user = users.find((usr: UsersModel) => usr.id === this.data.id);
-    const i = users.indexOf(user);
-    const users_ = users.splice(i, 1);
+    this.usersService.deleteUser(this.data.id).subscribe({});
   }
 }

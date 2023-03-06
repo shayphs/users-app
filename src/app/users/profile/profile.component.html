@@ -1,5 +1,7 @@
 <h1>Profile</h1>
 
+<mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+
 <mat-card class="example-card">
   <mat-card-header>
     <mat-card-title>{{ user.name }}</mat-card-title>
