@@ -3,7 +3,7 @@ export enum role {
   User = 'User',
 }
 
-export const users: any = [
+export let users: any = [
   {
     id: 1,
     name: 'John Smith',

@@ -1,8 +1,9 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { role, users } from '../mock/users.mock';
 import { EditComponent } from './edit/edit.component';
@@ -72,7 +73,7 @@ export class UsersComponent implements OnInit {
 @Component({
   template: `
     <h1 mat-dialog-title>Delete User</h1>
-    <div mat-dialog-content>Are you sure that you want delete this user?</div>
+    <div mat-dialog-content>Are you sure that you want delete <b>{{data.name}}</b>?</div>
     <div mat-dialog-actions>
       <button
         mat-raised-button
@@ -87,7 +88,16 @@ export class UsersComponent implements OnInit {
   `,
 })
 export class DeleteUserComponent {
+
+  constructor(
+    public dialogRef: MatDialogRef<EditComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: UsersElement
+  ) {}
+
   removeUser() {
-    alert('User deleted');
+    const user = users.find((usr: any) => usr.id == this.data.id);
+    const i = users.indexOf(user);
+    const users_ = users.splice(i, 1);
+    console.log(users_);
   }
 }
