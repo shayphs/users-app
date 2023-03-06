@@ -6,16 +6,8 @@ import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
 import { EditModule } from '../edit/edit.module';
 
-
 @NgModule({
-  declarations: [
-    ProfileComponent
-  ],
-  imports: [
-    CommonModule,
-    ProfileRoutingModule,
-    MaterialModule,
-    EditModule
-  ]
+  declarations: [ProfileComponent],
+  imports: [CommonModule, ProfileRoutingModule, MaterialModule, EditModule],
 })
-export class ProfileModule { }
+export class ProfileModule {}

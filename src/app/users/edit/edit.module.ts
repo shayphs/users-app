@@ -6,17 +6,14 @@ import { MaterialModule } from '../../material.module';
 import { EditRoutingModule } from './edit-routing.module';
 import { EditComponent } from './edit.component';
 
-
 @NgModule({
-  declarations: [
-    EditComponent
-  ],
+  declarations: [EditComponent],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     EditRoutingModule,
-    MaterialModule
-  ]
+    MaterialModule,
+  ],
 })
-export class EditModule { }
+export class EditModule {}

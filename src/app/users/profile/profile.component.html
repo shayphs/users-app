@@ -1,16 +1,15 @@
 <h1>Profile</h1>
 
 <mat-card class="example-card">
-    <mat-card-header>
-      <mat-card-title>{{ user.name }}</mat-card-title>
-      <mat-card-subtitle>{{ user.role }}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content style="padding: 1em">
-      <p><b>ID:</b> {{ user.id }}</p>
-      <p><b>Email:</b> {{ user.email }}</p>
-      <p><b>Password:</b> {{ user.password }}</p>
-      <p><b>Created At:</b> {{ user.createdAt | date }}</p>
-    </mat-card-content>
-    <mat-card-actions>
-    </mat-card-actions>
-  </mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ user.name }}</mat-card-title>
+    <mat-card-subtitle>{{ user.role }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content style="padding: 1em">
+    <p><b>ID:</b> {{ user.id }}</p>
+    <p><b>Email:</b> {{ user.email }}</p>
+    <p><b>Password:</b> {{ user.password }}</p>
+    <p><b>Created At:</b> {{ user.createdAt | date }}</p>
+  </mat-card-content>
+  <mat-card-actions> </mat-card-actions>
+</mat-card>

@@ -7,15 +7,7 @@ import { UsersComponent, DeleteUserComponent } from './users.component';
 import { EditModule } from './edit/edit.module';
 
 @NgModule({
-  declarations: [
-    UsersComponent,
-    DeleteUserComponent
-  ],
-  imports: [
-    CommonModule,
-    UsersRoutingModule,
-    MaterialModule,
-    EditModule,
-  ]
+  declarations: [UsersComponent, DeleteUserComponent],
+  imports: [CommonModule, UsersRoutingModule, MaterialModule, EditModule],
 })
-export class UsersModule { }
+export class UsersModule {}
