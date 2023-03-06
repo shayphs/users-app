@@ -33,7 +33,7 @@
         <mat-menu #menu="matMenu">
           <button mat-menu-item [routerLink]="'/users/' + element.id">View</button>
           <button mat-menu-item (click)="openDialog(element)">Edit</button>
-          <button mat-menu-item>Delete</button>
+          <button mat-menu-item (click)="openDeleteDialog(element)">Delete</button>
         </mat-menu>
       </td>
     </ng-container>

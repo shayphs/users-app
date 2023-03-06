@@ -49,6 +49,16 @@ export class UsersComponent implements OnInit {
     });
   }
 
+  openDeleteDialog(user: any): void {
+    const dialogRef = this.dialog.open(DeleteUserComponent, {
+      data: { ...user },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // this.dataSource = result;
+    });
+  }
+
   announceSortChange(sortState: Sort) {
     if (sortState.direction) {
       this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
@@ -57,3 +67,15 @@ export class UsersComponent implements OnInit {
     }
   }
 }
+
+@Component({
+  template: `
+    <h1 mat-dialog-title>Delete User</h1>
+    <div mat-dialog-content>Are you sure that you want delete this user?</div>
+    <div mat-dialog-actions>
+      <button mat-raised-button mat-dialog-close color="warn">Yes!</button>
+      <button mat-raised-button mat-dialog-close>No</button>
+    </div>
+  `
+})
+export class DeleteUserComponent {}
