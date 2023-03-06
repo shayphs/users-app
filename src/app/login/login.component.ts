@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { users } from '../mock/users.mock';
+import { UsersService } from '../users/users.service';
+
 
 @Component({
   selector: 'app-login',
@@ -12,7 +14,8 @@ export class LoginComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   flag: boolean = true;
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(private fb: FormBuilder, private router: Router,
+    private usersService: UsersService) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -28,22 +31,18 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    const validUser = users.find((element: any) => {
-      console.log(element);
-      console.log(this.form.value);
-      return (
-        element.email === this.form.value.email &&
-        element.password === this.form.value.password
+    this.usersService.getUsersLogin(this.form.value).subscribe((res)=> {
+      const validUser = res[0];
+
+      if (!!validUser) {
+         localStorage.setItem(
+          'credentials',
+          JSON.stringify(validUser.email)
         );
-      });
+        localStorage.setItem('role', JSON.stringify(validUser.role));
+        this.router.navigate(['/users']);
+      }
+    });
       
-    if (!!validUser) {
-       localStorage.setItem(
-        'credentials',
-        JSON.stringify(validUser.email)
-      );
-      localStorage.setItem('role', JSON.stringify(validUser.role));
-      this.router.navigate(['/users']);
-    }
   }
 }

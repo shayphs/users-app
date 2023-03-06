@@ -58,7 +58,7 @@
     },
     {
       "name": "Anna Smith",
-      "role": null,
+      "role": "Admin",
       "email": null,
       "password": "123456",
       "createdAt": 1678131176358,

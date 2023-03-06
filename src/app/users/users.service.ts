@@ -14,11 +14,15 @@ export class UsersService {
     return this.http.get<UsersModel>(`http://localhost:3000/users`);
   }
 
+  getUsersLogin(user:UsersModel): Observable<any> {
+    return this.http.get<UsersModel>(`http://localhost:3000/users?email=${user.email}&password=${user.password}`);
+  }
+
   getUser(id: number): Observable<any> {
     return this.http.get<UsersModel>(`http://localhost:3000/users/${id}`);
   }
   
-  updateUser(id: number, data: any): Observable<any> {
+  updateUser(id: number, data: UsersModel): Observable<any> {
     if (id) {
       return this.http.patch<UsersModel>(`http://localhost:3000/users/${id}`, data);
     }

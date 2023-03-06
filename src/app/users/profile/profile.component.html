@@ -2,7 +2,7 @@
 
 <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
 
-<mat-card class="example-card" *ngIf="!disableEdit || user?.email === userEmail; else msg">
+<mat-card class="example-card" *ngIf="(!disableEdit || user?.email === userEmail) && !!user; else msg">
   <mat-card-header>
     <mat-card-title>{{ user.name }}</mat-card-title>
     <mat-card-subtitle>{{ user.role }}</mat-card-subtitle>
