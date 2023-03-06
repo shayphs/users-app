@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from "@angular/router";
 import { users } from '../mock/users.mock';
 
 @Component({
@@ -11,7 +12,7 @@ export class LoginComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   flag: boolean = true;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -28,60 +29,8 @@ export class LoginComponent implements OnInit {
     if (isValidUser) {
       // do login
       localStorage.setItem('credentials', JSON.stringify(this.form.value.email));
+      localStorage.setItem('role', JSON.stringify('Admin'));
+      this.router.navigate(['/users']);
     }
   }
 }
-
-/*
-import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { users } from '../mock/users.mock';
-
-@Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
-})
-export class LoginComponent implements OnInit {
-  email = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('', [
-    Validators.required,
-    // Validators.minLength(4),
-    // Validators.pattern(/^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9!@#$%^&*()_+]+)$/),
-  ]);
-  hidePassword = true;
-  
-  constructor() { }
-
-  getEmailErrorMessage() {
-    if (this.email.hasError('required')) {
-      return 'You must enter an email';
-    }
-
-    return this.email.hasError('email') ? 'Not a valid email' : '';
-  }
-
-  getPasswordErrorMessage() {
-    if (this.password.hasError('required')) {
-      return 'You must enter a password';
-    }
-
-    return this.email.hasError('email') ? 'Not a valid email' : '';
-  }
-
-  login() {
-    const isValidUser = users.some((element:any) => {
-      console.log(element);
-      console.log(this.email.value);
-      console.log(this.password);
-      return element.email === this.email.value && element.password === this.password.value;
-    });
-
-    console.log(isValidUser);
-  }
-  
-  ngOnInit(): void {
-  }
-
-}
-*/

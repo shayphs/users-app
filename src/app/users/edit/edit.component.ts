@@ -1,9 +1,12 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import { users } from '../mock/users.mock';
+import { role } from '../../mock/users.mock';
+import { users } from '../../mock/users.mock';
+
 
 export interface DialogData {
+  id: number;
   email: string;
   role: string;
   name: string;
@@ -18,6 +21,7 @@ export interface DialogData {
 export class EditComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   flag: boolean = true;
+  roleList = [role.Admin, role.User];
 
   constructor(private fb: FormBuilder,public dialogRef: MatDialogRef<EditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
@@ -41,14 +45,13 @@ export class EditComponent implements OnInit {
     });
   }
 
-  edit() {
-    // const isValidUser = users.some((element:any) => {
-    //   return element.email === this.form.value.email && element.password === this.form.value.password;
-    // });
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 
-    // if (isValidUser) {
-    //   // do login
-    //   localStorage.setItem('credentials', JSON.stringify(this.form.value.email));
-    // }
+  edit() {
+    const user = users.find((usr:any) => usr.id == this.data.id);
+    const i = users.indexOf(user);
+    users[i] = this.form.value;
   }
 }

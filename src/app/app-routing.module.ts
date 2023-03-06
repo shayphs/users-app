@@ -1,17 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+const canSee = () => {
+  return !!localStorage.getItem('credentials');
+}
+
 const routes: Routes = [
   {
-    path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
+    path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule), canActivate: [canSee],
   },
   {
-    path: 'profile', loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)
+    path: 'users/:id', loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule), canActivate: [canSee]
   },
   {
     path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
   },
-  { path: 'edit', loadChildren: () => import('./edit/edit.module').then(m => m.EditModule) }
+  { path: 'edit', loadChildren: () => import('./users/edit/edit.module').then(m => m.EditModule), canActivate: [canSee] },
+
+  { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];
 
 @NgModule({

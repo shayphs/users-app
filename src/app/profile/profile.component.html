@@ -2,16 +2,15 @@
 
 <mat-card class="example-card">
     <mat-card-header>
-      <mat-card-title>Shiba Inu</mat-card-title>
-      <mat-card-subtitle>Admin</mat-card-subtitle>
+      <mat-card-title>{{ user.name }}</mat-card-title>
+      <mat-card-subtitle>{{ user.role }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content style="padding: 1em">
-      <p><b>ID:</b> 1</p>
-      <p><b>Email:</b> john.smith@gmail.com</p>
-      <p><b>Password:</b> xxxx</p>
-      <p><b>Created At:</b> 11/11/22</p>
+      <p><b>ID:</b> {{ user.id }}</p>
+      <p><b>Email:</b> {{ user.email }}</p>
+      <p><b>Password:</b> {{ user.password }}</p>
+      <p><b>Created At:</b> {{ user.createdAt | date }}</p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-flat-button color="primary" routerLink="/edit">Edit</button>
     </mat-card-actions>
   </mat-card>

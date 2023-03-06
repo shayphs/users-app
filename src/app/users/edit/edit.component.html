@@ -15,10 +15,13 @@
                 <div>
                     <mat-form-field appearance="standard" class="w-100 mb-1">
                         <mat-label>Role:</mat-label>
-                        <input matInput type="text" formControlName="role" placeholder="Your role">
+                        <mat-select formControlName="role">
+                            <mat-option *ngFor="let rl of roleList" [value]="rl">
+                              {{rl}}
+                            </mat-option>
+                        </mat-select>
                         <mat-hint>Select role</mat-hint>
                         <mat-error *ngIf="form.controls['role'].errors?.['required']">Role is required</mat-error>
-                        <mat-error *ngIf="form.controls['role'].errors?.['pattern']">Please enter valid role</mat-error>
                     </mat-form-field>
                 </div>
                 <div>
@@ -46,8 +49,8 @@
                 </div>
     
                 <div>
-                    <button mat-raised-button color="primary" type="submit">Save</button>
-                    <button mat-raised-button color="secondary" style="margin-left:0.5em">Cancel</button>
+                    <button mat-raised-button color="primary" type="submit" [mat-dialog-close]="data">Save</button>
+                    <button mat-raised-button color="basic" (click)="onNoClick()" style="margin-left:0.5em">Cancel</button>
                 </div>
     
             </form>

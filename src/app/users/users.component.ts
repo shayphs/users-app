@@ -1,15 +1,16 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
-import { EditComponent } from '../edit/edit.component';
+import { EditComponent } from './edit/edit.component';
 import { users } from '../mock/users.mock';
+import { role } from '../mock/users.mock';
 
 export interface UsersElement {
   id: number;
   name: string;
   email: string;
   password: string;
-  role: number; // enum
+  role: role; // enum
 }
 
 const ELEMENT_DATA: UsersElement[] = users;
@@ -34,7 +35,7 @@ export class UsersComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      // this.dataSource = result;
     });
   }
 
