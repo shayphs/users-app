@@ -1,6 +1,10 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -39,7 +43,7 @@ export class UsersComponent implements OnInit {
     this.disableEdit = localStorage.getItem('role') !== '"Admin"';
   }
 
-  getUsers(){
+  getUsers() {
     this.isLoading = true;
     this.usersService.getUsers().subscribe(
       (res) => {
@@ -49,7 +53,8 @@ export class UsersComponent implements OnInit {
       (error) => {
         console.log(error);
         this.isLoading = false;
-      });
+      }
+    );
   }
 
   openDialog(user: UsersModel | null): void {
@@ -84,7 +89,10 @@ export class UsersComponent implements OnInit {
 @Component({
   template: `
     <h1 mat-dialog-title>Delete User</h1>
-    <div mat-dialog-content>Are you sure that you want delete <b>{{data.name}}</b>?</div>
+    <div mat-dialog-content>
+      Are you sure that you want delete <b>{{ data.name }}</b
+      >?
+    </div>
     <div mat-dialog-actions>
       <button
         mat-raised-button
@@ -99,7 +107,6 @@ export class UsersComponent implements OnInit {
   `,
 })
 export class DeleteUserComponent {
-
   constructor(
     public dialogRef: MatDialogRef<EditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: UsersModel,

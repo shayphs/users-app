@@ -15,7 +15,10 @@ export class ProfileComponent implements OnInit {
   disableEdit = true;
   userEmail = localStorage.getItem('credentials')?.replace(/\"/g, '');
 
-  constructor(private route: ActivatedRoute, private usersService: UsersService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private usersService: UsersService
+  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -34,6 +37,7 @@ export class ProfileComponent implements OnInit {
       (error) => {
         console.log(error);
         this.isLoading = false;
-      });
+      }
+    );
   }
 }
