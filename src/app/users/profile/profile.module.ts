@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MaterialModule } from '../material.module';
+import { MaterialModule } from '../../material.module';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
-import { EditModule } from '../users/edit/edit.module';
+import { EditModule } from '../edit/edit.module';
 
 
 @NgModule({

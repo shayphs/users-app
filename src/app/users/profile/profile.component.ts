@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { users } from '../mock/users.mock';
+import { users } from '../../mock/users.mock';
 
 @Component({
   selector: 'app-profile',
