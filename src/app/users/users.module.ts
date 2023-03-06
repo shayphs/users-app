@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
 import { MaterialModule } from '../material.module';
-import { UsersRoutingModule } from './users-routing.module';
-import { UsersComponent, DeleteUserComponent } from './users.component';
 import { EditModule } from './edit/edit.module';
+import { UsersRoutingModule } from './users-routing.module';
+import { DeleteUserComponent, UsersComponent } from './users.component';
 
 @NgModule({
   declarations: [UsersComponent, DeleteUserComponent],

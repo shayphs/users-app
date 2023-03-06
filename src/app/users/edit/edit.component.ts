@@ -1,12 +1,9 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
-  MatDialog,
-  MAT_DIALOG_DATA,
-  MatDialogRef,
+  MatDialogRef, MAT_DIALOG_DATA
 } from '@angular/material/dialog';
-import { role } from '../../mock/users.mock';
-import { users } from '../../mock/users.mock';
+import { role, users } from '../../mock/users.mock';
 
 export interface DialogData {
   id: number;

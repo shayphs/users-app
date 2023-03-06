@@ -1,16 +1,13 @@
-import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import {
-  MatDialog,
-  MAT_DIALOG_DATA,
-  MatDialogRef,
-} from '@angular/material/dialog';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  MatDialog
+} from '@angular/material/dialog';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
+import { role, users } from '../mock/users.mock';
 import { EditComponent } from './edit/edit.component';
-import { users } from '../mock/users.mock';
-import { role } from '../mock/users.mock';
 
 export interface UsersElement {
   id: number;
