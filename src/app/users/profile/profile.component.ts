@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { users } from '../../mock/users.mock';
+import { UsersModel } from '../users.model';
+
 
 @Component({
   selector: 'app-profile',
@@ -19,6 +21,6 @@ export class ProfileComponent implements OnInit {
   }
 
   getUser(id: string) {
-    this.user = users.find((usr: any) => usr.id == id);
+    this.user = users.find((usr: UsersModel) => usr.id === parseInt(id, 10));
   }
 }

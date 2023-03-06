@@ -7,16 +7,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { role, users } from '../mock/users.mock';
 import { EditComponent } from './edit/edit.component';
+import { UsersService } from './users.service';
+import { UsersModel } from './users.model';
 
-export interface UsersElement {
-  id: number;
-  name: string;
-  email: string;
-  password: string;
-  role: role; // enum
-}
-
-const ELEMENT_DATA: UsersElement[] = users;
+const ELEMENT_DATA: UsersModel[] = [];
 
 @Component({
   selector: 'app-users',
@@ -25,12 +19,13 @@ const ELEMENT_DATA: UsersElement[] = users;
 })
 export class UsersComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'role', 'action'];
-  // dataSource = ELEMENT_DATA;
   dataSource = new MatTableDataSource(ELEMENT_DATA);
+  isLoading = false;
 
   constructor(
     public dialog: MatDialog,
-    private _liveAnnouncer: LiveAnnouncer
+    private _liveAnnouncer: LiveAnnouncer,
+    private usersService: UsersService
   ) {}
 
   @ViewChild(MatSort) sort: any;
@@ -39,9 +34,20 @@ export class UsersComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.isLoading = true;
+    this.usersService.getUsers().subscribe(
+      (res) => {
+        this.dataSource = res;
+        this.isLoading = false;
+      },
+      (error) => {
+        console.log(error);
+        this.isLoading = false;
+      });
+  }
 
-  openDialog(user: any): void {
+  openDialog(user: UsersModel): void {
     const dialogRef = this.dialog.open(EditComponent, {
       data: { ...user },
     });
@@ -51,7 +57,7 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  openDeleteDialog(user: any): void {
+  openDeleteDialog(user: UsersModel): void {
     const dialogRef = this.dialog.open(DeleteUserComponent, {
       data: { ...user },
     });
@@ -91,13 +97,12 @@ export class DeleteUserComponent {
 
   constructor(
     public dialogRef: MatDialogRef<EditComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: UsersElement
+    @Inject(MAT_DIALOG_DATA) public data: UsersModel
   ) {}
 
   removeUser() {
-    const user = users.find((usr: any) => usr.id == this.data.id);
+    const user = users.find((usr: UsersModel) => usr.id === this.data.id);
     const i = users.indexOf(user);
     const users_ = users.splice(i, 1);
-    console.log(users_);
   }
 }

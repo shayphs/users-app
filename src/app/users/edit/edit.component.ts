@@ -2,14 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { role, users } from '../../mock/users.mock';
-
-export interface DialogData {
-  id: number;
-  email: string;
-  role: string;
-  name: string;
-  password: string;
-}
+import { UsersModel } from '../users.model';
 
 @Component({
   selector: 'app-edit',
@@ -24,7 +17,7 @@ export class EditComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<EditComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
+    @Inject(MAT_DIALOG_DATA) public data: UsersModel
   ) {}
 
   ngOnInit(): void {
@@ -57,7 +50,7 @@ export class EditComponent implements OnInit {
   }
 
   edit() {
-    const user = users.find((usr: any) => usr.id == this.data.id);
+    const user = users.find((usr: UsersModel) => usr.id === this.data.id);
     const i = users.indexOf(user);
     users[i] = this.form.value;
   }
